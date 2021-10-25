@@ -29,11 +29,11 @@
             };
         })
       ];
-      # pkgs = import nixpkgs { inherit system overlays; inherit (haskellNix) config; };
-      # flake = pkgs.myProject.flake {
-      #   # This adds support for `nix build .#js-unknown-ghcjs-cabal:hello:exe:hello`
-      #   crossPlatforms = p: [p.ghcjs];
-      # };
+      pkgs = import nixpkgs { inherit system overlays; inherit (haskellNix) config; };
+      flake = pkgs.myProject.flake {
+        # This adds support for `nix build .#js-unknown-ghcjs-cabal:hello:exe:hello`
+        # crossPlatforms = p: [p.ghcjs];
+      };
     in flake // {
       # Built by `nix build .`
       defaultPackage = flake.packages."cntools:exe:blocks";
