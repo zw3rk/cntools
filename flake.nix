@@ -25,7 +25,7 @@
                 nixpkgs-fmt
               ];
               # This adds `js-unknown-ghcjs-cabal` to the shell.
-              shell.crossPlatform = p: [p.ghcjs];
+              # shell.crossPlatform = p: [p.ghcjs];
             };
         })
       ];
