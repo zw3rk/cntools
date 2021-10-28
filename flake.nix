@@ -7,6 +7,7 @@
     flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
     let
       overlays = [ haskellNix.overlay
+        (final: prev: { libsodium = final.callPackage ./libsodium.nix {}; })
         (final: prev: {
           # This overlay adds our project to pkgs
           myProject =
