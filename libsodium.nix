@@ -1,7 +1,7 @@
-{ stdenv, fetchFromGitHub, autoreconfHook }:
+{ lib, stdenv, fetchFromGitHub, autoreconfHook }:
 
 stdenv.mkDerivation rec {
-  name = "libsodium-1.0.18";
+  name = "libsodium-1.0.18-vrf";
 
   src = fetchFromGitHub {
     owner = "input-output-hk";
@@ -13,6 +13,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ autoreconfHook ];
 
   configureFlags = "--enable-static --disable-shared --disable-pie --disable-ssp";
+  #configureFlags = "--disable-static --enable-shared --disable-pie --disable-ssp";
 
   outputs = [ "out" "dev" ];
 
@@ -26,11 +27,11 @@ stdenv.mkDerivation rec {
 
   doCheck = true;
 
-  meta = with stdenv.lib; {
+  meta = {
     description = "A modern and easy-to-use crypto library";
     homepage = "http://doc.libsodium.org/";
-    license = licenses.isc;
+    # license = licenses.isc;
     maintainers = [ "tdammers" "nclarke" ];
-    platforms = platforms.all;
+    platforms = lib.platforms.all;
   };
 }

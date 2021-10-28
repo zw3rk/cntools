@@ -7,7 +7,7 @@
     flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
     let
       overlays = [ haskellNix.overlay
-        (final: prev: { libsodium = final.callPackage ./libsodium.nix {}; })
+        (final: prev: { libsodium-vrf = final.callPackage ./libsodium.nix {}; })
         (final: prev: {
           # This overlay adds our project to pkgs
           myProject =
@@ -27,6 +27,9 @@
               ];
               # This adds `js-unknown-ghcjs-cabal` to the shell.
               # shell.crossPlatform = p: [p.ghcjs];
+              modules = [
+                ({ lib, pkgs, ... }: { packages.cntools.components.exes.blocks.pkgconfig = lib.mkForce [ [ pkgs.libsodium-vrf ] ]; })
+              ];
             };
         })
       ];
