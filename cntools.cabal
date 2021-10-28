@@ -31,6 +31,22 @@ executable blocks
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
-    build-depends:    base ^>=4.14.3.0
+    ghc-options:      -threaded -rtsopts -with-rtsopts=-N
+    build-depends:     base             ^>=4.14.3.0
+                      ,aeson             >= 1.5.6.0
+		      ,wreq
+		      ,lens
+		      ,lens-aeson
+		      ,base16-lens
+		      ,bytestring
+		      ,containers
+		      ,text
+		      ,blake2
+		      ,binary
+		      ,time
+		      ,tz
+		      
     hs-source-dirs:   blocks
     default-language: Haskell2010
+
+    pkgconfig-depends: libsodium
